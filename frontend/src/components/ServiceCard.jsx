@@ -12,8 +12,8 @@ export default function ServiceCard({ day, note, time, delay = 0 }) {
         aria-hidden="true"
       />
       <span className="text-xs font-bold uppercase tracking-[0.2em] text-gold-soft">{day}</span>
-      <span className="font-display text-4xl font-semibold text-cream sm:text-5xl">{time}</span>
-      <span className="text-sm font-medium text-cream/60">{note}</span>
+      <span className="service-time font-display text-4xl font-semibold text-cream sm:text-5xl">{time}</span>
+      {note ? <span className="text-sm font-medium text-cream/60">{note}</span> : null}
     </div>
   );
 }

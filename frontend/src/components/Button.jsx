@@ -13,7 +13,7 @@ export default function Button({
   ...rest
 }) {
   const baseClasses =
-    'inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition-all duration-300 select-none cursor-pointer';
+    'inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide whitespace-nowrap transition-all duration-300 select-none cursor-pointer';
 
   const variants = {
     primary:
@@ -35,7 +35,7 @@ export default function Button({
 
   if (href) {
     return (
-      <a href={href} className={classes} {...rest}>
+      <a href={href} onClick={onClick} className={classes} {...rest}>
         {children}
       </a>
     );

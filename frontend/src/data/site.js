@@ -6,6 +6,18 @@
  * replaced with real details when available.
  */
 
+import logo from '../assets/images/logo.jpeg';
+import hero from '../assets/images/hero-church.jpeg';
+import about from '../assets/images/congregation-group.jpeg';
+import building from '../assets/images/building-front.jpeg';
+import buildingAlt from '../assets/images/building-alt.jpeg';
+import pastor from '../assets/images/pastor-arumugam.jpeg';
+import assistantPastor from '../assets/images/assistant-pastor.jpg';
+import kids from '../assets/images/kids-event.jpg';
+import youth from '../assets/images/youth-group.jpg';
+import newYear from '../assets/images/newyear-event.jpg';
+import elders from '../assets/images/elders-group.jpg';
+
 export const site = {
   name: 'Church Of Christ',
   nameTamil: 'கிறிஸ்துவின் சபை',
@@ -13,17 +25,17 @@ export const site = {
   taglineTamil: 'வேதமே வெளிச்சம்',
 
   images: {
-    logo: '/images/logo.jpeg',
-    hero: '/images/hero-church.jpeg',
-    about: '/images/congregation-group.jpeg',
-    building: '/images/building-front.jpeg',
-    buildingAlt: '/images/building-alt.jpeg',
-    pastor: '/images/pastor-arumugam.jpeg',
-    assistantPastor: '/images/assistant-pastor.jpg',
-    kids: '/images/kids-event.jpg',
-    youth: '/images/youth-group.jpg',
-    newYear: '/images/newyear-event.jpg',
-    elders: '/images/elders-group.jpg',
+    logo,
+    hero,
+    about,
+    building,
+    buildingAlt,
+    pastor,
+    assistantPastor,
+    kids,
+    youth,
+    newYear,
+    elders,
   },
 
   /* Navigation — hrefs point to section anchors. Songs/Videos are
