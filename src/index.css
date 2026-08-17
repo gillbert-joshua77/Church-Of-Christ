@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette */
+  --color-cream: #f6f1e7;
+  --color-cream-deep: #efe7d6;
+  --color-charcoal: #25221d;
+  --color-charcoal-soft: #2e2a23;
+  --color-charcoal-deep: #1b1915;
+  --color-gold: #a9803f;
+  --color-gold-soft: #c9a96b;
+  --color-gold-mist: #eadfc4;
+
+  /* Typography */
+  --font-display: "Fraunces", "Noto Sans Tamil", Georgia, "Times New Roman", serif;
+  --font-body: "Manrope", "Noto Sans Tamil", ui-sans-serif, system-ui, sans-serif;
+  --font-tamil: "Noto Sans Tamil", "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream text-charcoal font-body antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    @apply bg-gold text-cream;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

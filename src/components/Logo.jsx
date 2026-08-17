@@ -1,0 +1,40 @@
+import { useLanguage } from '../context/LanguageContext';
+import { site } from '../data/site';
+
+/**
+ * Church logo + wordmark. `tone` — "light" (cream background)
+ * or "dark" (charcoal background).
+ */
+export default function Logo({ tone = 'light', compact = false }) {
+  const { lang } = useLanguage();
+  const isDark = tone === 'dark';
+  const name = lang === 'ta' ? site.nameTamil : site.name;
+  const tagline = lang === 'ta' ? site.taglineTamil : site.tagline;
+
+  return (
+    <a href="#home" className="group flex items-center gap-3" aria-label={name}>
+      <span className="relative inline-flex h-11 w-11 shrink-0 overflow-hidden rounded-full ring-2 ring-gold/60 transition-transform duration-300 group-hover:scale-105">
+        <img
+          src={site.images.logo}
+          alt=""
+          className="h-full w-full object-cover"
+          loading="eager"
+        />
+      </span>
+      <span className="flex flex-col leading-tight">
+        <span
+          className={`font-display text-lg font-semibold sm:text-xl ${
+            isDark ? 'text-cream' : 'text-charcoal'
+          }`}
+        >
+          {name}
+        </span>
+        {!compact && (
+          <span className={`text-[11px] font-medium uppercase tracking-[0.18em] text-gold sm:text-xs`}>
+            {tagline}
+          </span>
+        )}
+      </span>
+    </a>
+  );
+}
