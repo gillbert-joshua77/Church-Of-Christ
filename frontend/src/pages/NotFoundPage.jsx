@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import Button from '../components/Button';
 
@@ -13,15 +12,12 @@ export default function NotFoundPage() {
       <div className="flex max-w-md flex-col items-center gap-4 text-center">
         <span className="font-display text-7xl font-semibold text-gold/40">404</span>
         <h1 className="font-display text-3xl font-semibold text-charcoal sm:text-4xl">
-          {t.songs.notFoundTitle}
+          {t.notFound.title}
         </h1>
-        <p className="text-base leading-relaxed text-charcoal/70">{t.songs.notFoundText}</p>
-        <Button to="/" variant="primary" size="md">
-          {t.nav.home}
+        <p className="text-base leading-relaxed text-charcoal/70">{t.notFound.text}</p>
+        <Button to="/" variant="goldOutline" size="md">
+          {t.notFound.home}
         </Button>
-        <Link to="/songs" className="text-sm font-bold text-gold transition-colors hover:text-charcoal">
-          {t.nav.songs} →
-        </Link>
       </div>
     </div>
   );

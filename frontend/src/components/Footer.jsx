@@ -82,14 +82,12 @@ export default function Footer() {
           </div>
 
           {/* Service times */}
-          <div>
-            <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-gold-soft">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <h3 className="mb-4 text-center text-xs font-bold uppercase tracking-[0.2em] text-gold-soft sm:text-left">
               {t.footer.servicesHeading}
             </h3>
-            <ul className="flex flex-col gap-2.5 text-sm text-cream/70">
+            <ul className="flex flex-col gap-2.5 text-center text-sm text-cream/70 sm:text-left">
               <li>{t.footer.sunday9}</li>
-              <li>{t.footer.sunday11}</li>
-              <li>{t.footer.wednesday}</li>
             </ul>
           </div>
 

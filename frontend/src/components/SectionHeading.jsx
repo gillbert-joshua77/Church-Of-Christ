@@ -6,6 +6,7 @@ export default function SectionHeading({
   eyebrow,
   title,
   subtitle,
+  sub,
   align = 'left',
   tone = 'light',
   className = '',
@@ -29,9 +30,9 @@ export default function SectionHeading({
       >
         {title}
       </h2>
-      {subtitle ? (
+      {subtitle || sub ? (
         <p className={`text-base leading-relaxed sm:text-lg ${isDark ? 'text-cream/70' : 'text-charcoal/70'}`}>
-          {subtitle}
+          {subtitle || sub}
         </p>
       ) : null}
     </div>
