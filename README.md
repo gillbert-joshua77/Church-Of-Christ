@@ -55,30 +55,40 @@ Church-Of-Christ/
 > The backend, database, and authentication are **planned** design
 > placeholders only. Nothing beyond the frontend is built yet.
 
-## Content folders (Songs & Videos)
+## Content folders (Songs)
 
 The website is driven by the real content in the project root:
 
 - `Song Lyrics/` — one `.txt` file per song (Tamil lyrics)
-- `Video/` — local `.mp4`/`.webm`/`.mov` files; top-level folders become
-  video **series**, standalone files appear under **General**
 
-There is **no manual index** — the Vite content plugin
-(`frontend/plugins/contentPlugin.js`) reads these folders at dev/build
-startup and exposes the content to React as virtual modules. **Add a file,
-restart/build Vite, and it appears automatically.**
+There is **no manual index** for songs — the Vite content plugin
+(`frontend/plugins/contentPlugin.js`) reads the folder at dev/build
+startup and exposes the content to React as a virtual module. **Add a
+song file, restart/build Vite, and it appears automatically.** Songs are
+parsed into a normalized shape (see `src/content/songs/songParser.js`)
+that mirrors the future Django API contract, so swapping in the backend
+later only changes the loader (`src/content/*/…Loader.js`).
 
-- Songs & videos are parsed into a normalized shape (see
-  `src/content/songs/songParser.js` and `src/content/videos/videoParser.js`)
-  that mirrors the future Django API contract, so swapping in the backend
-  later only changes the loaders (`src/content/*/…Loader.js`).
-- Local videos are served in `vite dev` and `vite preview` via a
-  Range-aware middleware (`/content/videos/…`). They are **not** copied
-  into the build by default (the folder is multi-GB) — set
-  `KS_COPY_VIDEOS=1` on `vite build` to include them in `dist/`.
-- Thumbnails: if `ffmpeg`/`ffprobe` are installed, a representative frame
-  is extracted per video; otherwise (or when no image exists next to a
-  video) a branded CSS placeholder is shown — never a broken image.
+## Videos (`frontend/src/data/videos.json`)
+
+Videos are a hand-maintained JSON index — there are no local MP4 files:
+
+```json
+{
+  "id": 1,
+  "title": "கிறிஸ்து உங்கள் இல்லத்திற்கு வந்தால்...?",
+  "type": "video",          // "video" | "live"
+  "parts": [
+    { "part_no": 1, "ytId": "qJz5m5fMZl0" },
+    { "part_no": 2, "ytId": "DmewQjd8Vgo" }
+  ]
+}
+```
+
+- Each entry's `parts` are rendered in order as responsive YouTube embeds
+  built from `ytId` (thumbnails come straight from YouTube too).
+- `src/content/videos/videoLoader.js` normalizes the JSON into the shape
+  the UI expects; when a backend lands, only that loader changes.
 
 ## Getting started
 
