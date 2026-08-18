@@ -3,10 +3,14 @@ import Button from '../components/Button';
 import { useLanguage } from '../context/LanguageContext';
 import { site } from '../data/site';
 
-/**
- * Visit Us — final strong section with the church building photo.
- * Contact details remain configurable placeholders.
- */
+const EXTERNAL_LINK_ICON = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-4.5 w-4.5">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" y1="14" x2="21" y2="3" />
+  </svg>
+);
+
 export default function VisitUs() {
   const { t } = useLanguage();
 
@@ -37,24 +41,31 @@ export default function VisitUs() {
               {t.visit.heading}
             </h2>
 
+            {/* Church Name */}
+            <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-gold-soft font-medium">
+              {t.visit.churchName}
+            </p>
+
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-cream/75 sm:text-lg">
               {t.visit.sub}
             </p>
 
-            {/* Location + times */}
+            {/* Location + Service Time */}
             <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-cream/15 bg-charcoal-soft/60 px-6 py-5 backdrop-blur-sm">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-soft">
                   {t.visit.location}
                 </p>
-                <p className="mt-2 text-sm text-cream/70">{t.visit.addressLine2}</p>
+                <p className="mt-2 text-sm text-cream/70">
+                  {t.visit.location === 'Dindigul, Tamil Nadu' ? 'Dindigul, Tamil Nadu' : 'திண்டுக்கல், தமிழ்நாடு'}
+                </p>
               </div>
               <div className="rounded-2xl border border-cream/15 bg-charcoal-soft/60 px-6 py-5 backdrop-blur-sm">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-soft">
                   {t.visit.sundayLabel}
                 </p>
                 <p className="mt-2 text-sm text-cream/70">
-                  9:00 AM <span className="mx-1 text-gold">·</span> 11:00 AM
+                  {t.visit.sundayTime}
                 </p>
               </div>
             </div>
@@ -68,9 +79,7 @@ export default function VisitUs() {
                 rel="noopener noreferrer"
               >
                 {t.visit.ctaDirections}
-              </Button>
-              <Button to="/#contact" variant="ghostLight" size="lg">
-                {t.visit.ctaContact}
+                {EXTERNAL_LINK_ICON}
               </Button>
             </div>
           </div>

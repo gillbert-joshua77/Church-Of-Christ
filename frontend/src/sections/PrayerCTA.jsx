@@ -1,13 +1,19 @@
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import RevealAnimation from '../components/RevealAnimation';
 import Button from '../components/Button';
 import { useLanguage } from '../context/LanguageContext';
 
+const GOOGLE_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLScmTpQ-H-ldn89e9AnWsrOxtKrvjApz5YKaVOqAoPeTQrPDyA/viewform?embedded=true';
+
 /**
- * Prayer CTA — frontend only.
- * FUTURE: link the button to the prayer request form / backend.
+ * Prayer CTA — button first, form expands on click.
  */
 export default function PrayerCTA() {
   const { t } = useLanguage();
+  const [showForm, setShowForm] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <section id="prayer" className="scroll-mt-24 bg-cream pb-20 sm:pb-24 lg:pb-28">
@@ -48,18 +54,48 @@ export default function PrayerCTA() {
                 {t.prayer.text}
               </p>
               <div className="mt-8">
-                {/* whitespace-normal! lets the long Tamil label wrap on
-                    narrow phones instead of overflowing the card */}
                 <Button
-                  to="/#prayer"
                   variant="primary"
                   size="lg"
                   className="whitespace-normal!"
+                  onClick={() => setShowForm((v) => !v)}
                 >
-                  {t.prayer.cta}
+                  {showForm ? t.prayer.close : t.prayer.cta}
                 </Button>
               </div>
             </div>
+
+            {/* Embedded Google Form — expands on button click */}
+            <AnimatePresence>
+              {showForm && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                  className="relative mx-auto mt-10 max-w-2xl overflow-hidden"
+                >
+                  {!loaded && (
+                    <div className="flex items-center justify-center rounded-2xl border border-charcoal/10 bg-white/60 py-20">
+                      <span className="text-sm text-charcoal/50">{t.prayer.loading}</span>
+                    </div>
+                  )}
+                  <iframe
+                    src={GOOGLE_FORM_URL}
+                    width="100%"
+                    frameBorder="0"
+                    marginHeight={0}
+                    marginWidth={0}
+                    onLoad={() => setLoaded(true)}
+                    className={`w-full rounded-2xl border border-charcoal/10 bg-white shadow-lg ${loaded ? 'block' : 'hidden'}`}
+                    style={{ minHeight: '500px' }}
+                    title={t.prayer.cta}
+                  >
+                    Loading…
+                  </iframe>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </RevealAnimation>
       </div>

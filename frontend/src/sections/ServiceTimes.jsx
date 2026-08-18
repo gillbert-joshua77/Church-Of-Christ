@@ -5,7 +5,6 @@ import Button from '../components/Button';
 import { useLanguage } from '../context/LanguageContext';
 import { site } from '../data/site';
 
-const CARD_KEYS = ['sundayMorning', 'sundayLate', 'wednesday'];
 
 /**
  * Service Times — dark charcoal section with three time cards.
@@ -39,17 +38,19 @@ export default function ServiceTimes() {
           />
         </RevealAnimation>
 
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-          {site.serviceTimes.map((service, i) => (
-            <RevealAnimation key={service.id} delay={i * 0.1} className="h-full">
-              <ServiceCard
-                day={t.serviceTimes[service.key].day}
-                note={t.serviceTimes[service.key].note}
-                time={t.serviceTimes[service.key].time || service.time}
-                delay={i * 60}
-              />
-            </RevealAnimation>
-          ))}
+        <div className="mt-12 flex justify-center">
+          <div className="grid w-full max-w-md grid-cols-1 gap-5">
+            {site.serviceTimes.map((service, i) => (
+              <RevealAnimation key={service.id} delay={i * 0.1} className="h-full">
+                <ServiceCard
+                  day={t.serviceTimes[service.key].day}
+                  note={t.serviceTimes[service.key].note}
+                  time={t.serviceTimes[service.key].time || service.time}
+                  delay={i * 60}
+                />
+              </RevealAnimation>
+            ))}
+          </div>
         </div>
 
         <RevealAnimation delay={0.2}>
