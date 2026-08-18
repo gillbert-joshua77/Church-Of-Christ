@@ -40,13 +40,13 @@ export const site = {
 
   /* Navigation — in-app links use react-router paths. Section links
      (home page anchors) point to /#anchor so they work from any page.
-     Songs is now a real page at /songs. */
+     Songs and Videos are real pages at /songs and /videos. */
   nav: [
     { id: 'home', key: 'home', href: '/' },
     { id: 'about', key: 'about', href: '/#about' },
     { id: 'ministries', key: 'ministries', href: '/#ministries' },
     { id: 'songs', key: 'songs', href: '/songs' },
-    { id: 'videos', key: 'videos', href: '/#videos' },
+    { id: 'videos', key: 'videos', href: '/videos' },
     { id: 'visit', key: 'visit', href: '/#visit' },
   ],
 

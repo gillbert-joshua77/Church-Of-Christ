@@ -91,6 +91,7 @@ export const translations = {
       comingSoon: 'விரைவில்',
       note: 'காணொளி இங்கு விரைவில் சேர்க்கப்படும்.',
       imageAlt: 'போதகர் ஈ.ஏ. அருமுகம் பிரசங்கம்',
+      viewAll: 'அனைத்துக் காணொளிகளையும் காண்க',
     },
     leadership: {
       eyebrow: 'தலைமை',
@@ -172,6 +173,34 @@ export const translations = {
       pdfLoading: 'தயாராகிறது…',
       demoNote:
         'இவை இந்த முன்னோட்டத்திற்காக எழுதப்பட்ட மாதிரிப் பாடல் வரிகள். விரைவில் உண்மையான பாடல் வரிகள் இங்கே சேர்க்கப்படும்.',
+    },
+    videos: {
+      eyebrow: 'வீடியோ நூலகம்',
+      title: 'வீடியோக்கள்',
+      subtitle:
+        'எங்கள் சபையின் பிரசங்கங்கள், வழிபாடு, வேதப் போதனைகள், நிகழ்வுகள் ஆகியவற்றைக் காணுங்கள்.',
+      searchLabel: 'தேடு',
+      searchPlaceholder: 'தலைப்பு, வகை அல்லது விளக்கத்தால் தேடுங்கள்…',
+      clear: 'அழி',
+      all: 'அனைத்தும்',
+      categories: {
+        Sermons: 'பிரசங்கங்கள்',
+        Worship: 'வழிபாடு',
+        'Bible Study': 'வேத பயிற்சி',
+        'Church Events': 'சபை நிகழ்வுகள்',
+      },
+      filterLabel: 'வகை வாரியாக வீடியோக்களை வடிகட்டு',
+      noResults: 'வீடியோக்கள் எதுவும் கிடைக்கவில்லை.',
+      resetFilters: 'வடிகட்டிகளை அழி',
+      backToVideos: 'வீடியோக்களுக்குத் திரும்பு',
+      watchOnYouTube: 'YouTube-இல் பார்க்க',
+      relatedVideos: 'தொடர்புடைய காணொளிகள்',
+      notFoundTitle: 'வீடியோ கிடைக்கவில்லை.',
+      notFoundText:
+        'நீங்கள் தேடிய காணொளியைக் கண்டுபிடிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.',
+      notFoundAction: 'வீடியோ நூலகத்திற்குச் செல்லுங்கள்',
+      demoNote:
+        'இவை முன்னோட்டத்திற்கான மாதிரிக் காணொளிகள். சபையின் உண்மையான காணொளிகள் விரைவில் இங்கே சேர்க்கப்படும்.',
     },
   },
 
@@ -257,6 +286,7 @@ export const translations = {
       comingSoon: 'Coming soon',
       note: 'Videos will be added here shortly.',
       imageAlt: 'Pastor E.A. Arumugam preaching',
+      viewAll: 'View all videos',
     },
     leadership: {
       eyebrow: 'Leadership',
@@ -338,6 +368,34 @@ export const translations = {
       pdfLoading: 'Preparing…',
       demoNote:
         'These are demo lyrics written for this preview. Real song lyrics will be added here soon.',
+    },
+    videos: {
+      eyebrow: 'Video Library',
+      title: 'Videos',
+      subtitle:
+        'Watch sermons, worship, Bible teaching and church events from our church.',
+      searchLabel: 'Search',
+      searchPlaceholder: 'Search by title, category or description…',
+      clear: 'Clear',
+      all: 'All',
+      categories: {
+        Sermons: 'Sermons',
+        Worship: 'Worship',
+        'Bible Study': 'Bible Study',
+        'Church Events': 'Church Events',
+      },
+      filterLabel: 'Filter videos by category',
+      noResults: 'No videos found.',
+      resetFilters: 'Clear Filters',
+      backToVideos: 'Back to Videos',
+      watchOnYouTube: 'Watch on YouTube',
+      relatedVideos: 'Related Videos',
+      notFoundTitle: 'Video not found.',
+      notFoundText:
+        'The video you are looking for could not be found. Please try again.',
+      notFoundAction: 'Back to the video library',
+      demoNote:
+        'These are sample videos for preview. The church’s real videos will be added here soon.',
     },
   },
 };
