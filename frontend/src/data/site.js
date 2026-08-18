@@ -55,9 +55,9 @@ export const site = {
   ],
 
   contact: {
-    phone: '[Phone Number]',
-    email: '[Email Address]',
-    address: '[Street Address]',
+    phone: '9943978833',
+    email: 'michell8833@gmail.com',
+    address: '9X6Q+93C, Malligai St, Ram Nagar, Elil Nagar,',
     addressLine2: 'Dindigul, Tamil Nadu, India',
   },
 
