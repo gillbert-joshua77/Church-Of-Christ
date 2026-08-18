@@ -12,7 +12,7 @@ import about from '../assets/images/congregation-group.jpeg';
 import building from '../assets/images/building-front.jpeg';
 import buildingAlt from '../assets/images/building-alt.jpeg';
 import pastor from '../assets/images/pastor-arumugam.jpeg';
-import assistantPastor from '../assets/images/assistant-pastor.jpg';
+import coPastor from '../assets/images/assistant-pastor.jpg';
 import kids from '../assets/images/kids-event.jpg';
 import youth from '../assets/images/youth-group.jpg';
 import newYear from '../assets/images/newyear-event.jpg';
@@ -31,7 +31,7 @@ export const site = {
     building,
     buildingAlt,
     pastor,
-    assistantPastor,
+    coPastor,
     kids,
     youth,
     newYear,

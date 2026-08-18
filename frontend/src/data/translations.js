@@ -101,7 +101,7 @@ export const translations = {
         role: 'பிரசங்கி',
       },
       assistantPreacher: {
-        name: 'Michall Rajkuamr A',
+        name: 'Michell Rajkuamr A',
         role: 'உதவிப் பிரசங்கி',
       },
     },
@@ -297,7 +297,7 @@ export const translations = {
       },
       assistantPreacher: {
         name: 'Michall Rajkuamr A',
-        role: 'Assistant Preacher',
+        role: 'Co-Pastor',
       },
     },
     dailyVerse: {

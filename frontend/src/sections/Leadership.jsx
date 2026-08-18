@@ -21,7 +21,7 @@ export default function Leadership() {
       id: 'assistant',
       name: t.leadership.assistantPreacher.name,
       role: t.leadership.assistantPreacher.role,
-      image: site.images.assistantPastor,
+      image: site.images.coPastor,
       placeholder: true,
     },
   ];
