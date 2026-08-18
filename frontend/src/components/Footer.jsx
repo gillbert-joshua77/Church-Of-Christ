@@ -37,7 +37,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <Link to="/" className="flex items-center gap-3" aria-label={name}>
-              <span className="inline-flex h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-gold/60">
+              <span className="inline-flex h-10 w-10 shrink-0 overflow-hidden rounded-full ring-2 ring-gold/60">
                 <img src={site.images.logo} alt="" className="h-full w-full object-cover" loading="lazy" />
               </span>
               <span className="flex flex-col leading-tight">

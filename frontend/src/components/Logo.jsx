@@ -13,8 +13,8 @@ export default function Logo({ tone = 'light', compact = false }) {
   const tagline = lang === 'ta' ? site.taglineTamil : site.tagline;
 
   return (
-    <Link to="/" className="group flex items-center gap-3" aria-label={name}>
-      <span className="relative inline-flex h-11 w-11 shrink-0 overflow-hidden rounded-full ring-2 ring-gold/60 transition-transform duration-300 group-hover:scale-105">
+    <Link to="/" className="group flex min-w-0 items-center gap-2 sm:gap-3" aria-label={name}>
+      <span className="relative inline-flex h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-gold/60 transition-transform duration-300 group-hover:scale-105">
         <img
           src={site.images.logo}
           alt=""
@@ -22,9 +22,9 @@ export default function Logo({ tone = 'light', compact = false }) {
           loading="eager"
         />
       </span>
-      <span className="flex flex-col leading-tight">
+      <span className="flex min-w-0 flex-col leading-tight">
         <span
-          className={`font-display text-lg font-semibold sm:text-xl ${
+          className={`font-display truncate text-lg font-semibold sm:text-xl ${
             isDark ? 'text-cream' : 'text-charcoal'
           }`}
         >

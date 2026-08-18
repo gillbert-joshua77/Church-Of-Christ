@@ -41,7 +41,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-charcoal/5 bg-cream/90 backdrop-blur-md">
-      <div className="mx-auto flex h-[72px] w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-[80px] w-full max-w-7xl items-center justify-between gap-3 overflow-hidden px-4 sm:px-6 lg:px-8">
         <Logo />
 
         {/* Desktop nav */}

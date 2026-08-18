@@ -95,9 +95,9 @@ html[lang="ta"] p {
 }
 
 /* Desktop navigation — longer Tamil labels need more room and a
-   slightly smaller size to stay balanced in the same 72px header. */
+   slightly smaller size to stay balanced in the same header. */
 html[lang="ta"] .desktop-nav {
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 html[lang="ta"] .desktop-nav a {
@@ -107,6 +107,11 @@ html[lang="ta"] .desktop-nav a {
 
 html[lang="ta"] .mobile-nav a {
   white-space: nowrap;
+}
+
+/* Header logo wordmark — Tamil text is wider, truncate gracefully */
+html[lang="ta"] header .truncate {
+  max-width: 180px;
 }
 
 /* Service-time display — natural Tamil phrases like “காலை 9:00 மணி”
