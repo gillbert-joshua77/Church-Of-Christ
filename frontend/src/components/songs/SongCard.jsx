@@ -19,12 +19,14 @@ export default function SongCard({ song }) {
         {song.songNumber}
       </span>
 
-      {/* Titles */}
+      {/* Titles — the Tamil-only songs show a single title line */}
       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
         <span className="truncate font-display text-lg font-semibold text-charcoal sm:text-xl">
           {song.titleEn}
         </span>
-        <span className="truncate text-sm text-charcoal/60 sm:text-base">{song.titleTa}</span>
+        {song.titleTa && song.titleTa !== song.titleEn ? (
+          <span className="truncate text-sm text-charcoal/60 sm:text-base">{song.titleTa}</span>
+        ) : null}
       </span>
 
       {/* Category */}

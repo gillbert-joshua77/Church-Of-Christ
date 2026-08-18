@@ -12,15 +12,23 @@ export default function LyricsRenderer({ sections, lang }) {
 
   return (
     <div className="lyrics-body flex flex-col gap-8">
-      {sections.map((section, i) => (
+      {sections.map((section, i) => {
+        // Sections carry bilingual labels (labelEn/labelTa) when available.
+        const label =
+          section.labelTa && section.labelEn
+            ? lang === 'ta'
+              ? section.labelTa
+              : section.labelEn
+            : section.label;
+        return (
         <section
           key={`${section.label}-${i}`}
           className="flex flex-col gap-3"
-          aria-label={section.label}
+          aria-label={label}
         >
           <h3 className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-gold">
             <span className="h-px w-6 bg-gold/50" aria-hidden="true" />
-            {section.label}
+            {label}
           </h3>
           <div className="flex flex-col gap-2.5">
             {section.lines.map((line, j) => (
@@ -37,7 +45,8 @@ export default function LyricsRenderer({ sections, lang }) {
             ))}
           </div>
         </section>
-      ))}
+        );
+      })}
     </div>
   );
 }

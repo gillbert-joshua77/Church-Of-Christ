@@ -1,14 +1,22 @@
 import { useLanguage } from '../../context/LanguageContext';
-import { getCategories } from '../../data/videos';
+import { getCategories } from '../../content/videos/videoLoader';
 
 /**
- * Category filter pills (All + each category).
- * The active filter is highlighted with background, border AND
- * aria-pressed (never color alone); filters combine with search upstream.
+ * Category/series filter pills (All + each category).
+ *
+ * `options` is an optional array of { value, label } — the Videos page
+ * passes localized series labels. When omitted, options are built from
+ * getCategories() with the translation table (raw category as fallback).
  */
-export default function VideoFilters({ value, onChange, className = '' }) {
+export default function VideoFilters({ value, onChange, options, className = '' }) {
   const { t } = useLanguage();
-  const options = ['All', ...getCategories()];
+  const pills =
+    options && options.length
+      ? options
+      : ['All', ...getCategories()].map((category) => ({
+          value: category,
+          label: category === 'All' ? t.videos.all : (t.videos.categories[category] ?? category),
+        }));
 
   return (
     <div
@@ -16,14 +24,13 @@ export default function VideoFilters({ value, onChange, className = '' }) {
       role="group"
       aria-label={t.videos.filterLabel}
     >
-      {options.map((category) => {
-        const active = value === category;
-        const label = category === 'All' ? t.videos.all : t.videos.categories[category];
+      {pills.map((pill) => {
+        const active = value === pill.value;
         return (
           <button
-            key={category}
+            key={pill.value}
             type="button"
-            onClick={() => onChange(category)}
+            onClick={() => onChange(pill.value)}
             aria-pressed={active}
             className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-300 ${
               active
@@ -31,7 +38,7 @@ export default function VideoFilters({ value, onChange, className = '' }) {
                 : 'border-charcoal/10 bg-white text-charcoal/70 hover:border-gold/50 hover:text-gold'
             }`}
           >
-            {label}
+            {pill.label}
           </button>
         );
       })}

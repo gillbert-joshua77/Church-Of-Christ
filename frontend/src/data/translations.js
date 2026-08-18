@@ -14,6 +14,7 @@ export const translations = {
       planVisit: 'வருகையைத் திட்டமிடுங்கள்',
       openMenu: 'மெனுவைத் திற',
       closeMenu: 'மெனுவை மூடு',
+      language: 'மொழி',
     },
     nav: {
       home: 'முகப்பு',
@@ -102,7 +103,7 @@ export const translations = {
         role: 'பிரசங்கி',
       },
       assistantPreacher: {
-        name: '[பெயர் சேர்க்கப்படும்]',
+        name: 'Michall Rajkuamr A',
         role: 'உதவிப் பிரசங்கி',
       },
     },
@@ -154,10 +155,7 @@ export const translations = {
       clear: 'அழி',
       all: 'அனைத்தும்',
       categories: {
-        Worship: 'வழிபாடு',
-        Praise: 'துதி',
-        Hymns: 'பாடல்கள்',
-        Devotional: 'பக்திப் பாடல்கள்',
+        General: 'பொது',
       },
       noResults: 'பாடல்கள் எதுவும் கிடைக்கவில்லை.',
       resetFilters: 'தேடலை மீட்டமை',
@@ -171,8 +169,6 @@ export const translations = {
       notFoundText: 'நீங்கள் தேடிய பாடல் கிடைக்கவில்லை. மீண்டும் முயற்சிக்கவும்.',
       notFoundAction: 'பாடல் நூலகத்திற்குச் செல்லுங்கள்',
       pdfLoading: 'தயாராகிறது…',
-      demoNote:
-        'இவை இந்த முன்னோட்டத்திற்காக எழுதப்பட்ட மாதிரிப் பாடல் வரிகள். விரைவில் உண்மையான பாடல் வரிகள் இங்கே சேர்க்கப்படும்.',
     },
     videos: {
       eyebrow: 'வீடியோ நூலகம்',
@@ -184,10 +180,7 @@ export const translations = {
       clear: 'அழி',
       all: 'அனைத்தும்',
       categories: {
-        Sermons: 'பிரசங்கங்கள்',
-        Worship: 'வழிபாடு',
-        'Bible Study': 'வேத பயிற்சி',
-        'Church Events': 'சபை நிகழ்வுகள்',
+        General: 'பொது',
       },
       filterLabel: 'வகை வாரியாக வீடியோக்களை வடிகட்டு',
       noResults: 'வீடியோக்கள் எதுவும் கிடைக்கவில்லை.',
@@ -199,8 +192,10 @@ export const translations = {
       notFoundText:
         'நீங்கள் தேடிய காணொளியைக் கண்டுபிடிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.',
       notFoundAction: 'வீடியோ நூலகத்திற்குச் செல்லுங்கள்',
-      demoNote:
-        'இவை முன்னோட்டத்திற்கான மாதிரிக் காணொளிகள். சபையின் உண்மையான காணொளிகள் விரைவில் இங்கே சேர்க்கப்படும்.',
+      unavailableTitle: 'காணொளி இங்கு கிடைக்கவில்லை',
+      unavailableText:
+        'இந்தக் காணொளியை இப்போது இயக்க முடியவில்லை. அதிகாரப்பூர்வ வெளியீட்டில் இது கிடைக்கும்.',
+      browserUnsupported: 'உங்கள் உலாவி இந்தக் காணொளியை இயக்க முடியவில்லை.',
     },
   },
 
@@ -209,6 +204,7 @@ export const translations = {
       planVisit: 'Plan Your Visit',
       openMenu: 'Open menu',
       closeMenu: 'Close menu',
+      language: 'Language',
     },
     nav: {
       home: 'Home',
@@ -297,7 +293,7 @@ export const translations = {
         role: 'Preacher',
       },
       assistantPreacher: {
-        name: '[Name to be added]',
+        name: 'Michall Rajkuamr A',
         role: 'Assistant Preacher',
       },
     },
@@ -349,10 +345,7 @@ export const translations = {
       clear: 'Clear',
       all: 'All',
       categories: {
-        Worship: 'Worship',
-        Praise: 'Praise',
-        Hymns: 'Hymns',
-        Devotional: 'Devotional',
+        General: 'General',
       },
       noResults: 'No songs found.',
       resetFilters: 'Reset search',
@@ -366,8 +359,6 @@ export const translations = {
       notFoundText: 'The song you are looking for could not be found. Please try again.',
       notFoundAction: 'Back to the song library',
       pdfLoading: 'Preparing…',
-      demoNote:
-        'These are demo lyrics written for this preview. Real song lyrics will be added here soon.',
     },
     videos: {
       eyebrow: 'Video Library',
@@ -379,10 +370,7 @@ export const translations = {
       clear: 'Clear',
       all: 'All',
       categories: {
-        Sermons: 'Sermons',
-        Worship: 'Worship',
-        'Bible Study': 'Bible Study',
-        'Church Events': 'Church Events',
+        General: 'General',
       },
       filterLabel: 'Filter videos by category',
       noResults: 'No videos found.',
@@ -394,8 +382,10 @@ export const translations = {
       notFoundText:
         'The video you are looking for could not be found. Please try again.',
       notFoundAction: 'Back to the video library',
-      demoNote:
-        'These are sample videos for preview. The church’s real videos will be added here soon.',
+      unavailableTitle: 'Video unavailable',
+      unavailableText:
+        'This video cannot be played right now. It will be available in the official release.',
+      browserUnsupported: 'Your browser does not support playing this video.',
     },
   },
 };

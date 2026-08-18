@@ -1,5 +1,5 @@
 import { useLanguage } from '../../context/LanguageContext';
-import { songCategories } from '../../data/songs';
+import { getCategories } from '../../content/songs/songLoader';
 
 /**
  * Category filter pills (All + each category).
@@ -7,7 +7,7 @@ import { songCategories } from '../../data/songs';
  */
 export default function SongFilters({ value, onChange, className = '' }) {
   const { t } = useLanguage();
-  const options = ['All', ...songCategories];
+  const options = ['All', ...getCategories()];
 
   return (
     <div

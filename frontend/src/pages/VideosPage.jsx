@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { filterVideos } from '../data/videos';
+import { getVideos, filterVideos } from '../content/videos/videoLoader';
 import VideoSearch from '../components/videos/VideoSearch';
 import VideoFilters from '../components/videos/VideoFilters';
 import VideoCard from '../components/videos/VideoCard';
@@ -8,15 +8,56 @@ import Button from '../components/Button';
 
 /**
  * Videos library — /videos.
- * Search + category filters combine over the demo data in src/data/videos.js.
- * When the backend lands, swap the data import for GET /api/videos/.
+ *
+ * Content is auto-discovered from the root `Video/` folder: top-level
+ * folders become series, each with its episodes (grouped below), and
+ * standalone files appear under "General". Search + filters run over all
+ * discovered metadata. When the backend lands, only the loader changes.
  */
 export default function VideosPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('All');
 
+  const videos = useMemo(() => getVideos(), []);
   const results = useMemo(() => filterVideos({ query, category }), [query, category]);
+
+  // Localized, de-duplicated filter options (series names in the active
+  // language; 'General' comes from the translation table).
+  const categoryOptions = useMemo(() => {
+    const map = new Map();
+    for (const video of videos) {
+      map.set(video.category, {
+        ta: video.seriesTa || video.seriesEn,
+        en: video.seriesEn || video.seriesTa,
+      });
+    }
+    const options = [{ value: 'All', label: t.videos.all }];
+    for (const [value, labels] of map) {
+      const label =
+        (lang === 'ta' ? labels.ta || labels.en : labels.en || labels.ta) ||
+        t.videos.categories[value] ||
+        value;
+      options.push({ value, label });
+    }
+    return options;
+  }, [videos, lang, t]);
+
+  // Group filtered results by category (series), preserving discovery order.
+  const groups = useMemo(() => {
+    const map = new Map();
+    for (const video of results) {
+      const key = video.category || 'General';
+      if (!map.has(key)) map.set(key, []);
+      map.get(key).push(video);
+    }
+    return [...map.entries()];
+  }, [results]);
+
+  const groupLabel = (key) => {
+    const option = categoryOptions.find((o) => o.value === key);
+    return option ? option.label : t.videos.categories[key] ?? key;
+  };
 
   const hasActiveFilters = query.trim() !== '' || category !== 'All';
 
@@ -40,9 +81,6 @@ export default function VideosPage() {
           <p className="mt-4 max-w-xl text-base leading-relaxed text-charcoal/70 sm:text-lg">
             {t.videos.subtitle}
           </p>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-charcoal/50">
-            {t.videos.demoNote}
-          </p>
         </div>
       </section>
 
@@ -51,17 +89,32 @@ export default function VideosPage() {
         <div className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <VideoSearch value={query} onChange={setQuery} className="w-full lg:max-w-md" />
-            <VideoFilters value={category} onChange={setCategory} />
+            <VideoFilters value={category} onChange={setCategory} options={categoryOptions} />
           </div>
         </div>
       </section>
 
-      {/* Results — 1 column mobile, 2 tablet, 3 desktop */}
+      {/* Results — grouped by series, 1 col mobile / 2 tablet / 3 desktop */}
       <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
         {results.length > 0 ? (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-            {results.map((video) => (
-              <VideoCard key={video.id} video={video} />
+          <div className="flex flex-col gap-12 lg:gap-14">
+            {groups.map(([key, items]) => (
+              <section key={key} aria-label={groupLabel(key)}>
+                {key !== 'General' || groups.length > 1 ? (
+                  <h2 className="mb-5 flex items-center gap-3 font-display text-2xl font-semibold text-charcoal sm:mb-6 sm:text-3xl">
+                    <span className="h-px w-8 bg-gold/60" aria-hidden="true" />
+                    {groupLabel(key)}
+                    <span className="text-sm font-semibold text-charcoal/40">
+                      {items.length}
+                    </span>
+                  </h2>
+                ) : null}
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+                  {items.map((video) => (
+                    <VideoCard key={video.id} video={video} />
+                  ))}
+                </div>
+              </section>
             ))}
           </div>
         ) : (

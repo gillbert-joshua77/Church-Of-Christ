@@ -1,5 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
+import {
+  getVideoTitle,
+  getSeriesLabel,
+  getEpisodeLabel,
+} from '../../content/videos/videoLoader';
 import { formatDate } from '../../utils/date';
 import VideoThumbnail from './VideoThumbnail';
 
@@ -15,8 +20,10 @@ import VideoThumbnail from './VideoThumbnail';
  */
 export default function VideoCard({ video }) {
   const { t, lang } = useLanguage();
-  const title = lang === 'ta' ? video.titleTa : video.titleEn;
-  const categoryLabel = t.videos.categories[video.category] ?? video.category;
+  const title = getVideoTitle(video, lang);
+  const seriesLabel = getSeriesLabel(video, lang);
+  const episodeLabel = getEpisodeLabel(video, lang);
+  const categoryLabel = seriesLabel || (t.videos.categories[video.category] ?? video.category);
 
   return (
     <Link
@@ -26,7 +33,7 @@ export default function VideoCard({ video }) {
       {/* Thumbnail */}
       <div className="relative aspect-video w-full overflow-hidden">
         <VideoThumbnail
-          youtubeId={video.youtubeId}
+          video={video}
           alt={title}
           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
         />
@@ -49,15 +56,24 @@ export default function VideoCard({ video }) {
           </span>
         </span>
 
-        {/* Category chip */}
+        {/* Series / category chip */}
         <span className="absolute left-3 top-3 rounded-full bg-charcoal/70 px-3 py-1 text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-cream backdrop-blur-sm">
           {categoryLabel}
         </span>
 
-        {/* Duration chip */}
-        {video.duration ? (
-          <span className="absolute bottom-3 right-3 rounded-md bg-charcoal/80 px-2 py-0.5 text-xs font-bold tabular-nums text-cream backdrop-blur-sm">
-            {video.duration}
+        {/* Episode + duration chips */}
+        {(episodeLabel || video.duration) ? (
+          <span className="absolute bottom-3 right-3 flex items-center gap-1.5">
+            {episodeLabel ? (
+              <span className="rounded-md bg-charcoal/80 px-2 py-0.5 text-xs font-bold tabular-nums text-cream backdrop-blur-sm">
+                {episodeLabel}
+              </span>
+            ) : null}
+            {video.duration ? (
+              <span className="rounded-md bg-charcoal/80 px-2 py-0.5 text-xs font-bold tabular-nums text-cream backdrop-blur-sm">
+                {video.duration}
+              </span>
+            ) : null}
           </span>
         ) : null}
       </div>
@@ -67,22 +83,24 @@ export default function VideoCard({ video }) {
         <h3 className="line-clamp-2 font-display text-lg font-semibold leading-snug text-charcoal transition-colors duration-300 group-hover:text-gold sm:text-xl">
           {title}
         </h3>
-        <p className="mt-auto flex items-center gap-2 text-sm text-charcoal/55">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-            className="h-4 w-4 shrink-0"
-          >
-            <rect x="3" y="4.5" width="18" height="17" rx="2.5" />
-            <path d="M3 9.5h18M8 2.5v4M16 2.5v4" />
-          </svg>
-          <time dateTime={video.date}>{formatDate(video.date, lang)}</time>
-        </p>
+        {video.date ? (
+          <p className="mt-auto flex items-center gap-2 text-sm text-charcoal/55">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              className="h-4 w-4 shrink-0"
+            >
+              <rect x="3" y="4.5" width="18" height="17" rx="2.5" />
+              <path d="M3 9.5h18M8 2.5v4M16 2.5v4" />
+            </svg>
+            <time dateTime={video.date}>{formatDate(video.date, lang)}</time>
+          </p>
+        ) : null}
       </div>
     </Link>
   );

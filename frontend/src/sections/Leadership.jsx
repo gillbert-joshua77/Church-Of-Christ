@@ -5,7 +5,6 @@ import { site } from '../data/site';
 
 /**
  * Leadership — preacher and assistant preacher.
- * The assistant's name is an intentional placeholder.
  */
 export default function Leadership() {
   const { t } = useLanguage();

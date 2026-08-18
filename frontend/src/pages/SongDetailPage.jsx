@@ -1,12 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { getSongBySlug } from '../data/songs';
+import { getSongBySlug } from '../content/songs/songLoader';
 import SongDetail from '../components/songs/SongDetail';
 import Button from '../components/Button';
 
 /**
  * Song detail — /songs/:slug.
- * Resolves the slug against the demo data; renders the reusable
+ * Resolves the slug against the auto-discovered songs; renders the reusable
  * SongDetail component, or a "Song Not Found" state for invalid slugs.
  */
 export default function SongDetailPage() {

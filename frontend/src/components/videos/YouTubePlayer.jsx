@@ -1,4 +1,4 @@
-import { getYouTubeEmbedUrl } from '../../data/videos';
+import { getYouTubeEmbedUrl } from '../../content/videos/videoLoader';
 
 /**
  * Responsive YouTube embed player.

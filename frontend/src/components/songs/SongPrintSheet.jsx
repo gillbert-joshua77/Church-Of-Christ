@@ -1,5 +1,6 @@
 import { useLanguage } from '../../context/LanguageContext';
 import { site } from '../../data/site';
+import { getSongTitle, getSongLyrics } from '../../content/songs/songLoader';
 import LyricsRenderer from './LyricsRenderer';
 
 /**
@@ -14,7 +15,8 @@ export default function SongPrintSheet({ song, songLang, renderAs = 'print' }) {
   const { lang } = useLanguage();
   const isTamil = songLang === 'ta';
 
-  const title = isTamil ? song.titleTa : song.titleEn;
+  const title = getSongTitle(song, songLang);
+  const lyrics = getSongLyrics(song, songLang);
   const languageLabel = isTamil ? 'தமிழ்' : 'English';
   const name = lang === 'ta' ? site.nameTamil : site.name;
   const tagline = lang === 'ta' ? site.taglineTamil : site.tagline;
@@ -35,7 +37,7 @@ export default function SongPrintSheet({ song, songLang, renderAs = 'print' }) {
           </h1>
         </div>
         <div className="mt-8">
-          <LyricsRenderer sections={isTamil ? song.lyricsTa : song.lyricsEn} lang={songLang} />
+          <LyricsRenderer sections={lyrics} lang={songLang} />
         </div>
       </div>
     );
@@ -51,7 +53,7 @@ export default function SongPrintSheet({ song, songLang, renderAs = 'print' }) {
         <h1 className="mt-2 text-3xl font-semibold leading-snug font-display">{title}</h1>
       </div>
       <div className="mt-8">
-        <LyricsRenderer sections={isTamil ? song.lyricsTa : song.lyricsEn} lang={songLang} />
+        <LyricsRenderer sections={lyrics} lang={songLang} />
       </div>
     </div>
   );

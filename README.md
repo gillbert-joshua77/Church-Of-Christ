@@ -55,6 +55,31 @@ Church-Of-Christ/
 > The backend, database, and authentication are **planned** design
 > placeholders only. Nothing beyond the frontend is built yet.
 
+## Content folders (Songs & Videos)
+
+The website is driven by the real content in the project root:
+
+- `Song Lyrics/` — one `.txt` file per song (Tamil lyrics)
+- `Video/` — local `.mp4`/`.webm`/`.mov` files; top-level folders become
+  video **series**, standalone files appear under **General**
+
+There is **no manual index** — the Vite content plugin
+(`frontend/plugins/contentPlugin.js`) reads these folders at dev/build
+startup and exposes the content to React as virtual modules. **Add a file,
+restart/build Vite, and it appears automatically.**
+
+- Songs & videos are parsed into a normalized shape (see
+  `src/content/songs/songParser.js` and `src/content/videos/videoParser.js`)
+  that mirrors the future Django API contract, so swapping in the backend
+  later only changes the loaders (`src/content/*/…Loader.js`).
+- Local videos are served in `vite dev` and `vite preview` via a
+  Range-aware middleware (`/content/videos/…`). They are **not** copied
+  into the build by default (the folder is multi-GB) — set
+  `KS_COPY_VIDEOS=1` on `vite build` to include them in `dist/`.
+- Thumbnails: if `ffmpeg`/`ffprobe` are installed, a representative frame
+  is extracted per video; otherwise (or when no image exists next to a
+  video) a branded CSS placeholder is shown — never a broken image.
+
 ## Getting started
 
 ```bash

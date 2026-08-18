@@ -1,14 +1,14 @@
 import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { getVideoBySlug } from '../data/videos';
+import { getVideoBySlug } from '../content/videos/videoLoader';
 import VideoDetail from '../components/videos/VideoDetail';
 import Button from '../components/Button';
 
 /**
  * Video detail — /videos/:slug.
- * Resolves the slug against the demo data; renders the reusable
- * VideoDetail component, or a "Video not found" state for invalid
- * slugs (no broken iframe is ever shown).
+ * Resolves the slug against the auto-discovered videos; renders the
+ * reusable VideoDetail component, or a "Video not found" state for
+ * invalid slugs (no broken player is ever shown).
  */
 export default function VideoDetailPage() {
   const { slug } = useParams();

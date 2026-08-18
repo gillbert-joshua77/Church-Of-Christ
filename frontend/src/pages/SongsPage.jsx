@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { filterSongs } from '../data/songs';
+import { filterSongs } from '../content/songs/songLoader';
 import SongSearch from '../components/songs/SongSearch';
 import SongFilters from '../components/songs/SongFilters';
 import SongCard from '../components/songs/SongCard';
@@ -8,8 +8,9 @@ import Button from '../components/Button';
 
 /**
  * Songs library — /songs.
- * Search + category filters combine over the demo data in src/data/songs.js.
- * When the backend lands, swap the data import for GET /api/songs/.
+ * Search + category filters combine over the auto-discovered content in the
+ * root `Song Lyrics/` folder (see src/content/songs/songLoader.js). When
+ * the backend lands, only the loader changes — this page stays as-is.
  */
 export default function SongsPage() {
   const { t } = useLanguage();

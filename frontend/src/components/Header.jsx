@@ -65,9 +65,9 @@ export default function Header() {
           </Button>
         </div>
 
-        {/* Mobile: language + hamburger */}
-        <div className="flex items-center gap-3 lg:hidden">
-          <LanguageSwitcher />
+        {/* Mobile: hamburger only — the language switcher lives in the
+            mobile menu so the row fits on narrow phones without clipping */}
+        <div className="flex items-center lg:hidden">
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -125,7 +125,15 @@ export default function Header() {
                   </Link>
                 </motion.div>
               ))}
-              <div className="mt-3 border-t border-charcoal/10 px-4 pt-5 pb-2">
+              {/* Language switcher — moved here on mobile so the header row
+                  never overflows on narrow screens */}
+              <div className="mt-3 flex items-center justify-between gap-3 border-t border-charcoal/10 px-4 pt-4">
+                <span className="text-xs font-bold uppercase tracking-[0.16em] text-charcoal/45">
+                  {t.header.language}
+                </span>
+                <LanguageSwitcher />
+              </div>
+              <div className="border-t border-charcoal/10 px-4 pt-4 pb-2">
                 <Button to="/#visit" variant="primary" size="md" className="w-full" onClick={close}>
                   {t.header.planVisit}
                 </Button>

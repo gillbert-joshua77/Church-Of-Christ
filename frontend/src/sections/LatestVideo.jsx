@@ -4,15 +4,15 @@ import SectionHeading from '../components/SectionHeading';
 import Button from '../components/Button';
 import VideoThumbnail from '../components/videos/VideoThumbnail';
 import { useLanguage } from '../context/LanguageContext';
-import { getLatestVideo } from '../data/videos';
+import { getLatestVideo, getVideoTitle } from '../content/videos/videoLoader';
 import { formatDate } from '../utils/date';
 
 /**
  * Latest Video / Sermon preview — home page.
  *
- * Driven by the SAME data source as the Videos library (src/data/videos.js):
- * it shows the featured (first) demo video and links through to its detail
- * page at /videos/:slug. There is no second video data source.
+ * Driven by the SAME data source as the Videos library: it shows the
+ * featured (first discovered) video and links through to its detail page
+ * at /videos/:slug. There is no second video data source.
  */
 export default function LatestVideo() {
   const { t, lang } = useLanguage();
@@ -20,7 +20,7 @@ export default function LatestVideo() {
 
   if (!video) return null;
 
-  const title = lang === 'ta' ? video.titleTa : video.titleEn;
+  const title = getVideoTitle(video, lang);
   const categoryLabel = t.videos.categories[video.category] ?? video.category;
 
   return (
@@ -36,7 +36,7 @@ export default function LatestVideo() {
             >
               <div className="aspect-video w-full overflow-hidden">
                 <VideoThumbnail
-                  youtubeId={video.youtubeId}
+                  video={video}
                   alt={title}
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 />
@@ -88,22 +88,24 @@ export default function LatestVideo() {
                 <p className="font-display text-2xl font-semibold leading-snug text-cream sm:text-3xl">
                   {title}
                 </p>
-                <p className="mt-2 flex items-center gap-2 text-sm text-cream/55">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    className="h-4 w-4"
-                  >
-                    <rect x="3" y="4.5" width="18" height="17" rx="2.5" />
-                    <path d="M3 9.5h18M8 2.5v4M16 2.5v4" />
-                  </svg>
-                  <time dateTime={video.date}>{formatDate(video.date, lang)}</time>
-                </p>
+                {video.date ? (
+                  <p className="mt-2 flex items-center gap-2 text-sm text-cream/55">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      className="h-4 w-4"
+                    >
+                      <rect x="3" y="4.5" width="18" height="17" rx="2.5" />
+                      <path d="M3 9.5h18M8 2.5v4M16 2.5v4" />
+                    </svg>
+                    <time dateTime={video.date}>{formatDate(video.date, lang)}</time>
+                  </p>
+                ) : null}
               </div>
             </RevealAnimation>
 

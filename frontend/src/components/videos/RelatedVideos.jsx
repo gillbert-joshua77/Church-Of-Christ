@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
-import { getRelatedVideos } from '../../data/videos';
+import { getRelatedVideos, getVideoTitle } from '../../content/videos/videoLoader';
 import { formatDate } from '../../utils/date';
 import VideoThumbnail from './VideoThumbnail';
 
@@ -22,7 +22,7 @@ export default function RelatedVideos({ slug }) {
       </h2>
       <ul className="mt-5 flex flex-col gap-4">
         {related.map((video) => {
-          const title = lang === 'ta' ? video.titleTa : video.titleEn;
+          const title = getVideoTitle(video, lang);
           const categoryLabel = t.videos.categories[video.category] ?? video.category;
           return (
             <li key={video.id}>
@@ -32,7 +32,7 @@ export default function RelatedVideos({ slug }) {
               >
                 <div className="relative aspect-video w-32 shrink-0 overflow-hidden rounded-xl sm:w-36">
                   <VideoThumbnail
-                    youtubeId={video.youtubeId}
+                    video={video}
                     alt={title}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
@@ -52,8 +52,13 @@ export default function RelatedVideos({ slug }) {
                     {title}
                   </h3>
                   <p className="mt-auto text-xs text-charcoal/55">
-                    {categoryLabel} ·{' '}
-                    <time dateTime={video.date}>{formatDate(video.date, lang)}</time>
+                    {categoryLabel}
+                    {video.date ? (
+                      <>
+                        {' · '}
+                        <time dateTime={video.date}>{formatDate(video.date, lang)}</time>
+                      </>
+                    ) : null}
                   </p>
                 </div>
               </Link>

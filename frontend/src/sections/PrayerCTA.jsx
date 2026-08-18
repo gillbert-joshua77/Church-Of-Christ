@@ -48,7 +48,14 @@ export default function PrayerCTA() {
                 {t.prayer.text}
               </p>
               <div className="mt-8">
-                <Button to="/#prayer" variant="primary" size="lg">
+                {/* whitespace-normal! lets the long Tamil label wrap on
+                    narrow phones instead of overflowing the card */}
+                <Button
+                  to="/#prayer"
+                  variant="primary"
+                  size="lg"
+                  className="whitespace-normal!"
+                >
                   {t.prayer.cta}
                 </Button>
               </div>

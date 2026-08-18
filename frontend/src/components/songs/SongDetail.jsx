@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
+import { getSongTitle, getSongLyrics } from '../../content/songs/songLoader';
 import SongLanguageToggle from './SongLanguageToggle';
 import LyricsRenderer from './LyricsRenderer';
 import DownloadLyricsButton from './DownloadLyricsButton';
@@ -24,10 +25,12 @@ export default function SongDetail({ song }) {
   }, [lang]);
 
   const isTamil = songLang === 'ta';
-  const title = isTamil ? song.titleTa : song.titleEn;
+  const title = getSongTitle(song, songLang);
+  // The secondary title only appears when a real translation exists.
   const secondaryTitle = isTamil ? song.titleEn : song.titleTa;
+  const showSecondary = secondaryTitle && secondaryTitle !== title;
   const categoryLabel = t.songs.categories[song.category] ?? song.category;
-  const sections = isTamil ? song.lyricsTa : song.lyricsEn;
+  const sections = getSongLyrics(song, songLang);
 
   return (
     <div className="bg-cream">
@@ -70,7 +73,9 @@ export default function SongDetail({ song }) {
               <h1 className="mt-5 font-display text-3xl font-semibold leading-tight text-charcoal text-balance sm:text-4xl lg:text-5xl">
                 {title}
               </h1>
-              <p className="mt-2 font-display text-lg text-charcoal/55 sm:text-xl">{secondaryTitle}</p>
+              {showSecondary ? (
+                <p className="mt-2 font-display text-lg text-charcoal/55 sm:text-xl">{secondaryTitle}</p>
+              ) : null}
             </div>
 
             {/* Local song-language toggle */}
@@ -94,10 +99,6 @@ export default function SongDetail({ song }) {
         <div className="mt-10 rounded-3xl border border-charcoal/8 bg-white p-6 shadow-sm sm:p-10 lg:p-12">
           <LyricsRenderer sections={sections} lang={songLang} />
         </div>
-
-        <p className="mt-8 text-xs leading-relaxed text-charcoal/45">
-          {t.songs.demoNote}
-        </p>
       </section>
       </div>
 

@@ -52,3 +52,6 @@ Thumbs.db
 # ---- Local tooling / temp artifacts ----
 .chrome-check-profile/
 tmp-overflow-check.mjs
+
+# ---- Generated content artifacts (Vite content plugin) ----
+frontend/public/thumbnails/
