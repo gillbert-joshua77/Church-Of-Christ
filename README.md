@@ -3,7 +3,7 @@
 **வேதமே வெளிச்சம் — The Word is Light**
 
 A bilingual (Tamil / English) church website for the **Church Of Christ** in
-Dindukkal, Tamil Nadu, India. The site introduces the church to its
+Dindigul, Tamil Nadu, India. The site introduces the church to its
 congregation and visitors with service times, ministries, leadership, events,
 and a way to plan a visit — all switchable between Tamil and English.
 

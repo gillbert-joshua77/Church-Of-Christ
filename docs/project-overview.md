@@ -3,7 +3,7 @@
 ## Church Of Christ — கிறிஸ்துவின் சபை
 
 A bilingual (Tamil / English) church website for the **Church Of Christ** in
-Dindukkal, Tamil Nadu, India.
+Dindigul, Tamil Nadu, India.
 
 **வேதமே வெளிச்சம் — The Word is Light.**
 

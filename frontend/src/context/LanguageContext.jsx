@@ -30,8 +30,8 @@ export function LanguageProvider({ children }) {
     document.documentElement.lang = lang;
     document.title =
       lang === 'ta'
-        ? 'கிறிஸ்துவின் சபை — Church Of Christ, Dindukkal'
-        : 'Church Of Christ — கிறிஸ்துவின் சபை, Dindukkal';
+        ? 'கிறிஸ்துவின் சபை — Church Of Christ, Dindigul'
+        : 'Church Of Christ — கிறிஸ்துவின் சபை, Dindigul';
   }, [lang]);
 
   const setLang = useCallback((next) => {
