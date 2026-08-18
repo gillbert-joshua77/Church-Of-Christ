@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { site } from '../data/site';
 
@@ -35,7 +36,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="flex flex-col gap-4">
-            <a href="#home" className="flex items-center gap-3" aria-label={name}>
+            <Link to="/" className="flex items-center gap-3" aria-label={name}>
               <span className="inline-flex h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-gold/60">
                 <img src={site.images.logo} alt="" className="h-full w-full object-cover" loading="lazy" />
               </span>
@@ -45,7 +46,7 @@ export default function Footer() {
                   {tagline}
                 </span>
               </span>
-            </a>
+            </Link>
             <p className="text-sm leading-relaxed text-cream/60">{t.footer.description}</p>
             <div className="flex items-center gap-3">
               {site.socials.map((social) => (
@@ -69,12 +70,12 @@ export default function Footer() {
             <ul className="flex flex-col gap-2.5">
               {site.nav.map((item) => (
                 <li key={item.id}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.href}
                     className="text-sm text-cream/70 transition-colors duration-300 hover:text-gold"
                   >
                     {t.nav[item.key]}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

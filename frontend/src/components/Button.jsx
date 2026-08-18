@@ -1,8 +1,14 @@
+import { Link } from 'react-router-dom';
+
 /**
- * Reusable action button. Renders an <a> when `href` is provided,
- * otherwise a <button>. Variants are tuned for both light and dark sections.
+ * Reusable action button.
+ * - `to`    → renders a react-router <Link> (in-app navigation)
+ * - `href`  → renders an <a> (external / anchor links)
+ * - default → renders a <button>
+ * Variants are tuned for both light and dark sections.
  */
 export default function Button({
+  to,
   href,
   onClick,
   type = 'button',
@@ -32,6 +38,14 @@ export default function Button({
   };
 
   const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`;
+
+  if (to) {
+    return (
+      <Link to={to} onClick={onClick} className={classes} {...rest}>
+        {children}
+      </Link>
+    );
+  }
 
   if (href) {
     return (

@@ -120,3 +120,35 @@ html[lang="ta"] .service-time {
     font-size: 2.25rem;
   }
 }
+
+/* ------------------------------------------------------------------
+   Print styles — "Print Lyrics"
+
+   When printing a song page, hide the site chrome (header, footer,
+   buttons, search, page chrome) and show only the dedicated print
+   sheet (SongPrintSheet) with the church name, song title, language
+   and lyrics.
+------------------------------------------------------------------ */
+
+@media print {
+  /* Hide the entire app chrome + page UI */
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Keep backgrounds crisp and consistent in print */
+  body {
+    background: #ffffff !important;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+
+  /* The print sheet is the only visible content */
+  .print\:block {
+    display: block !important;
+  }
+}

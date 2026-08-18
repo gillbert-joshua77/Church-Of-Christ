@@ -70,10 +70,10 @@ export default function Hero() {
           </motion.p>
 
           <motion.div {...fadeUp(0.36)} className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button href="#visit" variant="primary" size="lg">
+            <Button to="/#visit" variant="primary" size="lg">
               {t.hero.ctaPrimary}
             </Button>
-            <Button href="#about" variant="ghostLight" size="lg">
+            <Button to="/#about" variant="ghostLight" size="lg">
               {t.hero.ctaSecondary}
             </Button>
           </motion.div>

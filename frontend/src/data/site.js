@@ -38,15 +38,16 @@ export const site = {
     elders,
   },
 
-  /* Navigation — hrefs point to section anchors. Songs/Videos are
-     future pages and keep their anchors for when they are built. */
+  /* Navigation — in-app links use react-router paths. Section links
+     (home page anchors) point to /#anchor so they work from any page.
+     Songs is now a real page at /songs. */
   nav: [
-    { id: 'home', key: 'home', href: '#home' },
-    { id: 'about', key: 'about', href: '#about' },
-    { id: 'ministries', key: 'ministries', href: '#ministries' },
-    { id: 'songs', key: 'songs', href: '#songs' },
-    { id: 'videos', key: 'videos', href: '#videos' },
-    { id: 'visit', key: 'visit', href: '#visit' },
+    { id: 'home', key: 'home', href: '/' },
+    { id: 'about', key: 'about', href: '/#about' },
+    { id: 'ministries', key: 'ministries', href: '/#ministries' },
+    { id: 'songs', key: 'songs', href: '/songs' },
+    { id: 'videos', key: 'videos', href: '/#videos' },
+    { id: 'visit', key: 'visit', href: '/#visit' },
   ],
 
   serviceTimes: [
@@ -59,7 +60,7 @@ export const site = {
     phone: '[Phone Number]',
     email: '[Email Address]',
     address: '[Street Address]',
-    addressLine2: 'Dindukkal, Tamil Nadu, India',
+    addressLine2: 'Dindigul, Tamil Nadu, India',
   },
 
   /* Placeholders — real URLs to be added later. */
@@ -69,7 +70,7 @@ export const site = {
     { id: 'instagram', label: 'Instagram', href: '#' },
   ],
 
-  googleMapsDirectionsUrl: 'https://maps.google.com/?q=Dindukkal,Tamil Nadu,India',
+  googleMapsDirectionsUrl: 'https://maps.google.com/?q=Dindigul,Tamil Nadu,India',
 };
 
 /** LocalStorage key for the language preference. */

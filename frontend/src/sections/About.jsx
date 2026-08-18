@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import RevealAnimation from '../components/RevealAnimation';
 import SectionHeading from '../components/SectionHeading';
 import { useLanguage } from '../context/LanguageContext';
@@ -57,8 +58,8 @@ export default function About() {
             </RevealAnimation>
 
             <RevealAnimation delay={0.26}>
-              <a
-                href="#about"
+              <Link
+                to="/#about"
                 className="group mt-8 inline-flex items-center gap-2 text-sm font-bold text-gold transition-colors hover:text-charcoal"
               >
                 {t.about.storyLabel}
@@ -71,7 +72,7 @@ export default function About() {
                 <span className="ml-1 rounded-full border border-gold/40 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-gold-soft">
                   {t.about.storyHint}
                 </span>
-              </a>
+              </Link>
             </RevealAnimation>
           </div>
         </div>

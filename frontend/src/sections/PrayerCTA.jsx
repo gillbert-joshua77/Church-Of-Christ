@@ -48,7 +48,7 @@ export default function PrayerCTA() {
                 {t.prayer.text}
               </p>
               <div className="mt-8">
-                <Button href="#prayer" variant="primary" size="lg">
+                <Button to="/#prayer" variant="primary" size="lg">
                   {t.prayer.cta}
                 </Button>
               </div>

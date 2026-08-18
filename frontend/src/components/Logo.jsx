@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { site } from '../data/site';
 
@@ -12,7 +13,7 @@ export default function Logo({ tone = 'light', compact = false }) {
   const tagline = lang === 'ta' ? site.taglineTamil : site.tagline;
 
   return (
-    <a href="#home" className="group flex items-center gap-3" aria-label={name}>
+    <Link to="/" className="group flex items-center gap-3" aria-label={name}>
       <span className="relative inline-flex h-11 w-11 shrink-0 overflow-hidden rounded-full ring-2 ring-gold/60 transition-transform duration-300 group-hover:scale-105">
         <img
           src={site.images.logo}
@@ -35,6 +36,6 @@ export default function Logo({ tone = 'light', compact = false }) {
           </span>
         )}
       </span>
-    </a>
+    </Link>
   );
 }

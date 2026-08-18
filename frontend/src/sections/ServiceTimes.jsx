@@ -62,7 +62,7 @@ export default function ServiceTimes() {
             >
               {t.serviceTimes.ctaDirections}
             </Button>
-            <Button href="#visit" variant="ghostLight">
+            <Button to="/#visit" variant="ghostLight">
               {t.serviceTimes.ctaPlanVisit}
             </Button>
           </div>

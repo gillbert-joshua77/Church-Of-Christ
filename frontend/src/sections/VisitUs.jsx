@@ -69,7 +69,7 @@ export default function VisitUs() {
               >
                 {t.visit.ctaDirections}
               </Button>
-              <Button href="#contact" variant="ghostLight" size="lg">
+              <Button to="/#contact" variant="ghostLight" size="lg">
                 {t.visit.ctaContact}
               </Button>
             </div>

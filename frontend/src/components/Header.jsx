@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import Logo from './Logo';
 import Button from './Button';
@@ -46,20 +47,20 @@ export default function Header() {
         {/* Desktop nav */}
         <nav className="desktop-nav hidden items-center gap-7 lg:flex" aria-label="Main">
           {site.nav.map((item) => (
-            <a
+            <Link
               key={item.id}
-              href={item.href}
+              to={item.href}
               className="whitespace-nowrap text-sm font-semibold text-charcoal/75 transition-colors duration-300 hover:text-gold"
             >
               {t.nav[item.key]}
-            </a>
+            </Link>
           ))}
         </nav>
 
         {/* Desktop actions */}
         <div className="hidden items-center gap-4 lg:flex">
           <LanguageSwitcher />
-          <Button href="#visit" variant="primary" size="sm">
+          <Button to="/#visit" variant="primary" size="sm">
             {t.header.planVisit}
           </Button>
         </div>
@@ -109,20 +110,23 @@ export default function Header() {
           >
             <nav className="mobile-nav flex flex-col gap-1 px-4 py-5 sm:px-6" aria-label="Mobile">
               {site.nav.map((item, i) => (
-                <motion.a
+                <motion.div
                   key={item.id}
-                  href={item.href}
-                  onClick={close}
                   initial={reduceMotion ? false : { opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: reduceMotion ? 0 : 0.05 * i, duration: 0.25 }}
-                  className="rounded-xl px-4 py-3 text-base font-semibold text-charcoal/80 transition-colors hover:bg-cream-deep hover:text-gold"
                 >
-                  {t.nav[item.key]}
-                </motion.a>
+                  <Link
+                    to={item.href}
+                    onClick={close}
+                    className="block rounded-xl px-4 py-3 text-base font-semibold text-charcoal/80 transition-colors hover:bg-cream-deep hover:text-gold"
+                  >
+                    {t.nav[item.key]}
+                  </Link>
+                </motion.div>
               ))}
               <div className="mt-3 border-t border-charcoal/10 px-4 pt-5 pb-2">
-                <Button href="#visit" variant="primary" size="md" className="w-full" onClick={close}>
+                <Button to="/#visit" variant="primary" size="md" className="w-full" onClick={close}>
                   {t.header.planVisit}
                 </Button>
               </div>
