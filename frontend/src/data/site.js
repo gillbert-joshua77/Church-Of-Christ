@@ -51,9 +51,7 @@ export const site = {
   ],
 
   serviceTimes: [
-    { id: 'sunday-1', key: 'sundayMorning', time: '9:00 AM' },
-    { id: 'sunday-2', key: 'sundayLate', time: '11:00 AM' },
-    { id: 'wednesday', key: 'wednesday', time: '7:00 PM' },
+    { id: 'sunday', key: 'sunday', time: '9:00 AM – 11:30 AM' },
   ],
 
   contact: {
@@ -70,7 +68,7 @@ export const site = {
     { id: 'instagram', label: 'Instagram', href: '#' },
   ],
 
-  googleMapsDirectionsUrl: 'https://maps.google.com/?q=Dindigul,Tamil Nadu,India',
+  googleMapsDirectionsUrl: 'https://www.google.com/maps/place/Church+of+Christ+,Dindigul/@10.3607102,77.9850303,17z/data=!4m6!3m5!1s0x3b00ab7263e8da79:0x6d84ea76844a3d61!8m2!3d10.3609486!4d77.9876529!16s%2Fg%2F11pv0kttbf?entry=ttu&g_ep=EgoyMDI2MDgxMi4wIKXMDSoASAFQAw%3D%3D',
 };
 
 /** LocalStorage key for the language preference. */
