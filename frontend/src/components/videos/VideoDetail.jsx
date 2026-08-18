@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 import {
@@ -6,6 +7,7 @@ import {
   getEpisodeLabel,
   getVideoDescription,
   getYouTubeWatchUrl,
+  getYouTubeThumbnail,
 } from '../../content/videos/videoLoader';
 import { formatDate } from '../../utils/date';
 import Button from '../Button';
@@ -15,12 +17,14 @@ import RelatedVideos from './RelatedVideos';
 /**
  * Video detail — /videos/:slug.
  *
- * Picks the right player via VideoPlayer (local HTML5 vs YouTube embed vs
- * unavailable), shows series/episode/date metadata, and only renders the
- * description / "Watch on YouTube" sections when they actually exist.
+ * YouTube-style layout: main player (active part) on the left,
+ * parts playlist sidebar on the right. Single-part videos show
+ * the player alone; multi-part videos let users switch parts.
  */
 export default function VideoDetail({ video }) {
   const { t, lang } = useLanguage();
+  const [activePartIndex, setActivePartIndex] = useState(0);
+
   const title = getVideoTitle(video, lang);
   const description = getVideoDescription(video, lang);
   const seriesLabel = getSeriesLabel(video, lang);
@@ -28,6 +32,10 @@ export default function VideoDetail({ video }) {
   const categoryLabel =
     seriesLabel || (t.videos.categories[video.category] ?? video.category);
   const isYouTube = video.sourceType === 'youtube';
+
+  const hasParts = video.parts && video.parts.length > 1;
+  const activePart = hasParts ? video.parts[activePartIndex] : null;
+  const activeYoutubeId = activePart ? activePart.ytId : video.youtubeId;
 
   return (
     <div className="bg-cream">
@@ -108,10 +116,21 @@ export default function VideoDetail({ video }) {
               {title}
             </h1>
 
-            {/* Player */}
+            {/* Active Part Player */}
             <div className="mt-6">
-              <VideoPlayer video={video} title={title} />
+              <VideoPlayer
+                video={{ ...video, youtubeId: activeYoutubeId }}
+                title={activePart ? `${title} — ${t.videos.part} ${activePart.part_no}` : title}
+              />
             </div>
+
+            {/* Active part label */}
+            {hasParts ? (
+              <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-charcoal/60">
+                <span className="h-px w-5 bg-gold/60" aria-hidden="true" />
+                {t.videos.part} {activePart.part_no}
+              </p>
+            ) : null}
 
             {/* Description */}
             {description ? (
@@ -126,7 +145,7 @@ export default function VideoDetail({ video }) {
             {isYouTube ? (
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Button
-                  href={getYouTubeWatchUrl(video.youtubeId)}
+                  href={getYouTubeWatchUrl(activeYoutubeId)}
                   target="_blank"
                   rel="noopener noreferrer"
                   variant="primary"
@@ -146,9 +165,89 @@ export default function VideoDetail({ video }) {
             ) : null}
           </div>
 
-          {/* Related sidebar */}
+          {/* Sidebar — parts playlist (multi-part) or related (single-part) */}
           <div className="min-w-0">
-            <RelatedVideos slug={video.slug} />
+            {hasParts ? (
+              <div className="rounded-2xl border border-charcoal/8 bg-white shadow-sm">
+                {/* Playlist header */}
+                <div className="border-b border-charcoal/8 px-5 py-4">
+                  <h2 className="font-display text-base font-semibold leading-snug text-charcoal line-clamp-2 sm:text-lg">
+                    {title}
+                  </h2>
+                  <p className="mt-1 text-xs font-medium text-charcoal/50">
+                    {video.parts.length} {t.videos.part}{video.parts.length > 1 ? 's' : ''}
+                  </p>
+                </div>
+
+                {/* Parts list */}
+                <div className="max-h-[60vh] overflow-y-auto">
+                  {video.parts.map((part, index) => {
+                    const isActive = index === activePartIndex;
+                    return (
+                      <button
+                        key={part.part_no}
+                        onClick={() => setActivePartIndex(index)}
+                        className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors duration-200 ${
+                          isActive
+                            ? 'border-l-[3px] border-gold bg-gold-mist/40'
+                            : 'border-l-[3px] border-transparent hover:bg-cream-deep/60'
+                        }`}
+                      >
+                        {/* Part number / playing indicator */}
+                        <span
+                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+                            isActive
+                              ? 'bg-gold text-charcoal'
+                              : 'bg-charcoal/8 text-charcoal/50'
+                          }`}
+                        >
+                          {isActive ? (
+                            <svg viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5">
+                              <path d="M6 4h4v16H6V4Zm8 0h4v16h-4V4Z" />
+                            </svg>
+                          ) : (
+                            part.part_no
+                          )}
+                        </span>
+
+                        {/* Thumbnail */}
+                        <div className="relative h-16 w-28 shrink-0 overflow-hidden rounded-lg bg-charcoal-deep">
+                          <img
+                            src={getYouTubeThumbnail(part.ytId)}
+                            alt={`${title} — ${t.videos.part} ${part.part_no}`}
+                            loading="lazy"
+                            className="h-full w-full object-cover"
+                          />
+                          {isActive && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-charcoal/25">
+                              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-cream drop-shadow">
+                                <path d="M8 5.5v13l11-6.5L8 5.5Z" />
+                              </svg>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Part title */}
+                        <div className="min-w-0 flex-1">
+                          <p
+                            className={`line-clamp-2 text-sm font-semibold leading-snug ${
+                              isActive ? 'text-gold' : 'text-charcoal'
+                            }`}
+                          >
+                            {title}
+                          </p>
+                          <p className="mt-0.5 text-xs text-charcoal/50">
+                            {t.videos.part} {part.part_no}
+                          </p>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              <RelatedVideos slug={video.slug} />
+            )}
           </div>
         </div>
       </div>
